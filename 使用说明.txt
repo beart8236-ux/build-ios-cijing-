@@ -1,0 +1,11 @@
+Yves词境 - Apple 平台工程(macOS 桌面版 + iPad/iPhone 版),源码工程,未构建、未运行测试。
+一个仓库、两条流水线:
+  macOS 桌面: Electron  -> build-mac.command 或 Actions: build-mac    -> .dmg / .zip
+  iPad/iPhone: Capacitor -> build-ios.command 或 Actions: build-ios-unsigned -> 未签名 .ipa
+
+【macOS】见对话说明:node 22+,bash build-mac.command;首次打开被拦截 -> 右键打开/隐私与安全性“仍要打开”;未签名未公证。
+【iPad】iOS 构建必须在 macOS + Xcode 26+(Capacitor 8 要求)。
+ 方式一(推荐):Mac 上 bash build-ios.command -> 自动生成 ios 工程并打开 Xcode -> App 目标 Signing & Capabilities 选你的 Apple ID Team -> 连接 iPad(开发者模式)-> Run。免费 Apple ID 的安装有效期通常较短(约 7 天),需定期重装;长期使用/TestFlight/上架需付费 Apple Developer Program。
+ 方式二:GitHub 云构建得到“未签名 ipa”。未签名 ipa 不能直接装进 iPad,需用你信任的侧载工具以你自己的 Apple ID 重签,或在 Xcode 中签名。我未验证该云构建流程。
+数据:各平台存储互不相通;先在原版导出备份 JSON 再导入。导出文件在 iOS WebView 中可能无法直接下载(未测),必要时需加 Filesystem/Share 插件。
+Key 存本机,非加密保险库;工程不含 Key。上传到 GitHub 须使用私有仓库,.github 文件夹必须上传,package.json 必须在仓库根目录。

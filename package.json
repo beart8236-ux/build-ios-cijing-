@@ -1,0 +1,45 @@
+{
+  "name": "yves-cijing",
+  "version": "1.0.0",
+  "description": "Yves Cijing - vocabulary, dictation and journal reading (macOS desktop + iPad/iPhone)",
+  "author": "Yves",
+  "main": "main.cjs",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@capacitor/core": "8.6.2",
+    "@capacitor/ios": "8.6.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.6.2",
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "com.yves.cijing",
+    "productName": "Yves词境",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "app/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "artifactName": "Yves-Cijing-${version}-${arch}.${ext}"
+    },
+    "zip": {
+      "artifactName": "Yves-Cijing-${version}-${arch}-mac.${ext}"
+    }
+  }
+}
